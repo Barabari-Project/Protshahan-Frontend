@@ -171,51 +171,35 @@ const commonChartOptions = {
       },
       onClick: (e) => e.stopPropagation(),
     },
-    percentageLabels: {
-      afterDatasetsDraw(chart) {
-        const { ctx, data } = chart;
-        const datasets = chart.data.datasets[0].data;
-
-        chart.getDatasetMeta(0).data.forEach((bar, index) => {
-          const { x, y } = bar.tooltipPosition();
-          const percentage = datasets[index];
-
-          ctx.save();
-          ctx.font = "bold 12px Arial";
-          ctx.fillStyle = "#2D3748";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "bottom";
-          ctx.fillText(`${percentage}`, x, y - 5); // Positioning above the bar
-          ctx.restore();
-        });
-      },
-    },
+   
   },
 };
 
-  //customize tooltip
-  const plugins = [
-    {
-      id: "percentageLabels",
-      afterDatasetsDraw(chart) {
-        const { ctx, data } = chart;
-        const datasets = chart.data.datasets[0].data;
+const plugins = [
+  {
+    id: "percentageLabels",
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
 
-        chart.getDatasetMeta(0).data.forEach((bar, index) => {
+      chart.data.datasets.forEach((dataset, datasetIndex) => {
+        const meta = chart.getDatasetMeta(datasetIndex);
+        meta.data.forEach((bar, index) => {
           const { x, y } = bar.tooltipPosition();
-          const percentage = datasets[index];
+          const value = dataset.data[index];
 
           ctx.save();
           ctx.font = "bold 12px Arial";
           ctx.fillStyle = "#2D3748";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
-          ctx.fillText(`${percentage}`, x, y - 5); // Positioning above the bar
+          ctx.fillText(`${value}`, x, y - 5); // Positioning above the bar
           ctx.restore();
         });
-      },
+      });
     },
-  ];
+  },
+];
+
   return (
     <div className="bg-[#3c3950] min-h-screen font-lato">
       <div className="bg-[#212331] text-white py-8 px-11 max-md:px-0">

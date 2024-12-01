@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import data from "./art.json";
+import data from "../json/art/art.json";
 
 // Register the necessary components from Chart.js
 ChartJS.register(
