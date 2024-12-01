@@ -10,10 +10,7 @@ import {
   Legend,
 } from "chart.js";
 
-<<<<<<< HEAD
 // Register chart.js components
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const BarChart = () => {
@@ -43,12 +40,9 @@ const BarChart = () => {
       legend: {
         display: false,
       },
-<<<<<<< HEAD
       tooltip: {
         enabled: true, // Disable the default tooltip to use custom positioning
       },
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     },
     scales: {
       x: {
@@ -61,12 +55,9 @@ const BarChart = () => {
             weight: "bold",
           },
         },
-<<<<<<< HEAD
         grid: {
           display: false,
         },
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
       y: {
         title: {
@@ -84,17 +75,13 @@ const BarChart = () => {
         ticks: {
           stepSize: 5, // Set increment to 5
         },
-<<<<<<< HEAD
         grid: {
           display: false,
         },
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         color: "#e8461e",
       },
     },
   };
-<<<<<<< HEAD
 
   // Custom plugin to display the tooltip-like text above the bars
   const tooltipPlugin = {
@@ -117,8 +104,6 @@ const BarChart = () => {
       });
     },
   };
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
   return (
     <div className="bg-[#3c3950] min-h-screen font-lato">
@@ -153,7 +138,6 @@ const BarChart = () => {
               </p>
             </div>
           </div>
-<<<<<<< HEAD
           <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
             <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
               <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
@@ -171,21 +155,6 @@ const BarChart = () => {
         </div>
       </div>
     </div>
-=======
-    <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
-          Spectrum of Vulnerability
-        </h2>
-        <div className="w-full max-md:h-[54vh] h-full">
-          <Bar data={chartData} options={options} />
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-    </div>
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
   );
 };
 

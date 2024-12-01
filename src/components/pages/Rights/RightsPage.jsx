@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Doughnut, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import CounterSection from "./CounterSection";
-<<<<<<< HEAD
 import DataChart3 from "./DataChart3";
 import IndiaMap from "./IndiaMap";
 import occupationsData from "../json/rights/Data.json";
@@ -12,18 +11,6 @@ import DataChart5 from "./DataChart5";
 import DataChart6 from "./DataChart6";
 import DataChart2 from "./DataChart2";
 import DataChart7 from "./DataChart7";
-=======
-import DataChart2 from "./DataChart3";
-import IndiaMap from "./IndiaMap";
-import occupationsData from "../json/rights/Data.json";
-// import GovtLinkage from "../Education/DataChart2";
-import HomeVisitsPieChart from "./DataChart4";
-import ServiverChart from "./DataChart5";
-import LostChart from "./DataChart6";
-import ScholarChart from "./DataChart2";
-import DataChart7 from "./DataChart7";
-import Terc from "./Tearrr";
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -43,13 +30,8 @@ const Rights = () => {
     labels: ["4-9 Years", "10-19 Years", "20-29 Years"],
     datasets: [
       {
-<<<<<<< HEAD
         label: "Age Distribution",
         data: [fourToNine.count, tenToNineteen.count, twentyToTwentyNine.count], // Updated to use correct values
-=======
-        label: "Age Group Distribution",
-        data: [fourToNine.count, tenToNineteen.count, twentyToTwentyNine.count], // Use the 'count' values
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         backgroundColor: ["#3c3950", "#ce441a", "#919191"], // Colors for each section
       },
     ],
@@ -113,11 +95,7 @@ const Rights = () => {
       datasets: [
         {
           label: "Profession Percentage",
-<<<<<<< HEAD
           color: "#e8461e",
-=======
-          color:"#e8461e",
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           data: filteredData.map((item) => item.percentage),
           backgroundColor: [
             "rgb(224, 70, 31)",
@@ -153,13 +131,7 @@ const Rights = () => {
             const percentage = professionData.datasets[0].data[index];
             return `${tooltipItem.dataset.label}: ${percentage.toFixed(
               2
-<<<<<<< HEAD
             )}% from the total [${occupationsData.parent_profession.total_count}]`;
-=======
-            )}% from the total [${
-              occupationsData.parent_profession.total_count
-            }]`;
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
       },
@@ -231,22 +203,16 @@ const Rights = () => {
             </div>
           </div>
           <CounterSection />
-<<<<<<< HEAD
           <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
             {/* Doughnut Chart */}
             <div
               ref={doughnutRef}
               className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg"
             >
-=======
-          <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
-            <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
               <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
                 Age: 4-29 Years Boys & Girls
               </h2>
               <div className="w-full max-md:h-[54vh] h-full">
-<<<<<<< HEAD
                 {isDoughnutVisible && <Doughnut data={data} options={ageOptions} />}
               </div>
             </div>
@@ -288,33 +254,8 @@ const Rights = () => {
           </div>
           <div className="py-4 text-center m-6">
             <DataChart7 />
-=======
-                <Doughnut data={data} options={ageOptions} />
-              </div>
-            </div>
-
-            <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
-              <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
-                Occupation of the Guardians / Family
-              </h2>
-              <div className="w-full max-md:h-[54vh] h-full">
-                {professionData && (
-                  <Pie data={professionData} options={professionOptions} />
-                )}
-              </div>
-            </div>
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           </div>
         </div>
-        <IndiaMap />
-        <ScholarChart/>
-        <DataChart2 />
-        <HomeVisitsPieChart />
-        <ServiverChart />
-        <LostChart />
-        <DataChart7 />
-        {/* <Terc/> */}
-
       </div>
     </div>
   );

@@ -187,31 +187,18 @@ const hideTooltip = () => {
   {/* Tooltip */}
   <div
   id="tooltip"
-<<<<<<< HEAD
   className="fixed p-3 rounded-lg shadow-md bg-[#e0461f] text-white text-xs max-w-xs break-words"
   style={{
     pointerEvents: "none",
     whiteSpace: "normal",
     wordBreak: "break-word",
     
-=======
-  className="fixed p-3 rounded-lg shadow-xl opacity-0 scale-90 transform transition-all duration-300 pointer-events-none bg-gradient-to-r from-[#ce441a] via-[#ce441a] to-[#ce441a] text-white text-xs 
-  animate-tooltip-tooltipIn hover:opacity-100 hover:scale-100 hover:translate-y-2"  style={{
-    pointerEvents: "none",
-    boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)",
-    backdropFilter: "blur(4px)",
-    filter: "brightness(1.3)",
-    animation: "tooltip-glow 1.5s infinite alternate, tooltip-slide 0.3s ease-out",
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
   }}
 />
 </div>
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 <style jsx>{`
   @keyframes tooltip-glow {
     0% {

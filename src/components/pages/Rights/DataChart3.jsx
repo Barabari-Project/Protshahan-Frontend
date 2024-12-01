@@ -187,18 +187,12 @@ const DataChart3 = () => {
   }, []);
 
   return (
-<<<<<<< HEAD
     <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
       {/* Doughnut Chart Section */}
       <div
         ref={incomeRef}
         className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg"
       >
-=======
-    <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
-      {/* Doughnut Chart Section */}
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         <h2 className="text-xl font-semibold text-[#121331] mb-4 text-center">
           Income-Based Distribution of People
         </h2>
@@ -208,14 +202,10 @@ const DataChart3 = () => {
       </div>
 
       {/* Gender Chart Section */}
-<<<<<<< HEAD
       <div
         ref={genderRef}
         className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
       >
-=======
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         <h2 className="text-xl font-semibold text-[#121331] mb-4 text-center">
           Scholarships Given by Gender
         </h2>

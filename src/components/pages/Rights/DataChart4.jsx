@@ -2,21 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import JsonData from "../json/rights/Data.json";
-<<<<<<< HEAD
 import { useInView } from 'react-intersection-observer'; // For scroll detection
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DataChart4 = () => {
   const [chartData, setChartData] = useState(null);
   const [memberData, setMemberData] = useState(null);
-<<<<<<< HEAD
   const { ref: pieChartRef, inView: pieChartInView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const { ref: barChartRef, inView: barChartInView } = useInView({ triggerOnce: true, threshold: 0.1 });
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
   useEffect(() => {
     const homeVisitsData = {
@@ -122,17 +116,11 @@ const DataChart4 = () => {
         ticks: {
           maxRotation: 0, // Keep the labels horizontal
         },
-<<<<<<< HEAD
         grid: {
           display: false, // Remove gridlines on the y-axis
         },
       },
       y: {
-=======
-      },
-      y: {
-        
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         title: {
           display: true,
           text: "Percentage of Total (%)",
@@ -148,18 +136,14 @@ const DataChart4 = () => {
         ticks: {
           stepSize: 5, // Set increment to 5
         },
-<<<<<<< HEAD
         grid: {
           display: false, // Remove gridlines on the y-axis
         },
-=======
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
     },
   };
 
   return (
-<<<<<<< HEAD
     <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
       {/* Home Visits Pie Chart */}
       <div
@@ -167,42 +151,25 @@ const DataChart4 = () => {
         className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
         style={{ opacity: pieChartInView ? 1 : 0, transition: 'opacity 1s ease' }}
       >
-=======
-    <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
-      {/* Home Visits Pie Chart */}
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
           Home Visits Conducted by us
         </h2>
         <div className="w-full max-md:h-[54vh] h-full">
-<<<<<<< HEAD
           {chartData && pieChartInView && <Pie data={chartData} options={options} />}
-=======
-          {chartData && <Pie data={chartData} options={options} />}
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         </div>
       </div>
 
       {/* Family Members Bar Chart */}
-<<<<<<< HEAD
       <div
         ref={barChartRef}
         className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
         style={{ opacity: barChartInView ? 1 : 0, transition: 'opacity 1s ease' }}
       >
-=======
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
           Age-Based Population Distribution
         </h2>
         <div className="w-full max-md:h-[54vh] h-full">
-<<<<<<< HEAD
           {memberData && barChartInView && <Bar data={memberData} options={memberOptions} />}
-=======
-          {memberData && <Bar data={memberData} options={memberOptions} />}
->>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         </div>
       </div>
     </div>
