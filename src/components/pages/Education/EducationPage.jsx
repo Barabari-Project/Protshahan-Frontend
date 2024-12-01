@@ -13,7 +13,6 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import yearlyData from "../json/education/YearlyMonthlyData.json"; // Yearly data
 import studentData from "../json/education/StudentPassOut.json"; // Student pass out data
 import EduChart from "./DataChart";
-import User from "./User";
 // import DomesticViolenceDoughnutChart from "./Gec";
 
 // Register ChartJS components
@@ -174,7 +173,7 @@ const commonChartOptions = {
    
   },
 };
-
+//customize plugins
 const plugins = [
   {
     id: "percentageLabels",
@@ -228,7 +227,7 @@ const plugins = [
 
           <div className="flex justify-center py-10 px-4  bg-[#dcdcdc] gap-4 flex-col">
             {/* Yearly Bar Chart */}
-            <div className="flex gap-4">
+            <div className="flex gap-4 max-md:flex-col">
               <div className="w-1/2 max-md:w-full h-[73vh] max-md:h-[85vh] relative overflow-hidden bg-white p-4 rounded-lg shadow-md">
                 <div
                   className={`transition-transform duration-700 ease-in-out transform ${
@@ -421,7 +420,6 @@ const plugins = [
             {/* <DomesticViolenceDoughnutChart/> */}
           </div>
           <EduChart />
-          <User/>
         </div>
       </div>
     </div>

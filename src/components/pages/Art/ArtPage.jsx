@@ -70,7 +70,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },
+        },grid:{display:false}
       },
       y: {
         beginAtZero: true,
@@ -89,7 +89,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },
+        },grid:{display:false}
       },
     },
   };
@@ -142,7 +142,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },
+        },grid:{display:false}
       },
       y: {
         beginAtZero: true,
@@ -157,7 +157,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },
+        },grid:{display:false}
       },
     },
   };
@@ -224,7 +224,7 @@ const plugins = [
           <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
             Girl Participation Statistics in Arts and Activities
           </h2>
-          <div className="w-full max-md:h-[54vh] h-full">
+          <div className="w-full max-md:h-[64vh] h-full">
             <Bar data={chartData} options={options} plugins={plugins}/>
           </div>
         </div>
@@ -232,7 +232,7 @@ const plugins = [
           <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
             Number of Sessions Conducted by us
           </h2>
-          <div className="w-full max-md:h-[54vh] h-full">
+          <div className="w-full max-md:h-[64vh] h-full">
             <Bar data={sessionData} options={sessionOptions} plugins={plugins}/>
           </div>
         </div>

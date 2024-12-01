@@ -198,7 +198,9 @@ const CombinedBarChart = () => {
             text: "Categories",
             color: "#e8461e",
             font: { size: 16, weight: "bold" },
-          },
+          },grid:{
+            display:false
+          }
         },
         y: {
           title: {
@@ -211,6 +213,9 @@ const CombinedBarChart = () => {
           min: 0,
           max: 50,
           ticks: { stepSize: 10 },
+          grid:{
+            display:false
+          }
         },
       },
     };

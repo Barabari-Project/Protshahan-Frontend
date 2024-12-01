@@ -237,22 +237,22 @@ const Rights = () => {
             <IndiaMap />
           </div>
 
-          <div className="py-4 text-center m-6">
+          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
             <DataChart2 />
           </div>
-          <div className="py-4 text-center m-6">
+          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
             <DataChart3 />
           </div>
-          <div className="py-4 text-center m-6">
+          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
             <DataChart4 />
           </div>
-          <div className="py-4 text-center m-6">
+          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
             <DataChart5 />
           </div>
-          <div className="py-4 text-center m-6">
+          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
             <DataChart6 />
           </div>
-          <div className="py-4 text-center m-6">
+          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
             <DataChart7 />
           </div>
         </div>

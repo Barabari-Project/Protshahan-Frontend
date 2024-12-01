@@ -6,7 +6,6 @@ import Art from "./components/pages/Art/ArtPage.jsx";  {/* Ensure extension cons
 import Rights from "./components/pages/Rights/RightsPage.jsx";
 import Tech from "./components/pages/Technology/TechnologyPage.jsx";  
 import NotFound from "./components/NotFound.jsx";
-import SalaryChart from "./components/pages/Technology/Income.jsx";  {/* Ensure extension consistency */}
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path="/art" element={<Art />} />
         <Route path="/rights" element={<Rights />} />
         <Route path="/technology" element={<Tech />} />
-        <Route path="/income" element={<SalaryChart />} /> {/* Renamed path for clarity */}
         <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
       </Routes>
     </Router>
