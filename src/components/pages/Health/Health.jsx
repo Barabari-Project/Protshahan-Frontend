@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 
+// Register chart.js components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const BarChart = () => {
@@ -39,6 +40,9 @@ const BarChart = () => {
       legend: {
         display: false,
       },
+      tooltip: {
+        enabled: true, // Disable the default tooltip to use custom positioning
+      },
     },
     scales: {
       x: {
@@ -50,6 +54,9 @@ const BarChart = () => {
             size: 13,
             weight: "bold",
           },
+        },
+        grid: {
+          display: false,
         },
       },
       y: {
@@ -68,8 +75,33 @@ const BarChart = () => {
         ticks: {
           stepSize: 5, // Set increment to 5
         },
+        grid: {
+          display: false,
+        },
         color: "#e8461e",
       },
+    },
+  };
+
+  // Custom plugin to display the tooltip-like text above the bars
+  const tooltipPlugin = {
+    id: "tooltipAboveBars",
+    afterDatasetsDraw(chart) {
+      const { ctx, data } = chart;
+      const dataset = data.datasets[0];
+      const datasetMeta = chart.getDatasetMeta(0);
+      datasetMeta.data.forEach((bar, index) => {
+        const value = dataset.data[index];
+        const { x, y } = bar.tooltipPosition();
+
+        ctx.save();
+        ctx.font = "bold 12px Arial";
+        ctx.fillStyle = "#2D3748"; // Color for the text
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(value, x, y - 5); // Position the value above the bar
+        ctx.restore();
+      });
     },
   };
 
@@ -106,18 +138,22 @@ const BarChart = () => {
               </p>
             </div>
           </div>
-    <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
-          Spectrum of Vulnerability
-        </h2>
-        <div className="w-full max-md:h-[54vh] h-full">
-          <Bar data={chartData} options={options} />
+          <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
+            <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
+              <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
+                Spectrum of Vulnerability
+              </h2>
+              <div className="w-full max-md:h-[54vh] h-full">
+                <Bar
+                  data={chartData}
+                  options={options}
+                  plugins={[tooltipPlugin]} // Add the plugin here
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-    </div>
     </div>
   );
 };

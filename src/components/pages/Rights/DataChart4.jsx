@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import JsonData from "../json/rights/Data.json";
+import { useInView } from 'react-intersection-observer'; // For scroll detection
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DataChart4 = () => {
   const [chartData, setChartData] = useState(null);
   const [memberData, setMemberData] = useState(null);
+  const { ref: pieChartRef, inView: pieChartInView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { ref: barChartRef, inView: barChartInView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
     const homeVisitsData = {
@@ -113,9 +116,11 @@ const DataChart4 = () => {
         ticks: {
           maxRotation: 0, // Keep the labels horizontal
         },
+        grid: {
+          display: false, // Remove gridlines on the y-axis
+        },
       },
       y: {
-        
         title: {
           display: true,
           text: "Percentage of Total (%)",
@@ -131,29 +136,40 @@ const DataChart4 = () => {
         ticks: {
           stepSize: 5, // Set increment to 5
         },
+        grid: {
+          display: false, // Remove gridlines on the y-axis
+        },
       },
     },
   };
 
   return (
-    <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
+    <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
       {/* Home Visits Pie Chart */}
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
+      <div
+        ref={pieChartRef}
+        className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
+        style={{ opacity: pieChartInView ? 1 : 0, transition: 'opacity 1s ease' }}
+      >
         <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
           Home Visits Conducted by us
         </h2>
         <div className="w-full max-md:h-[54vh] h-full">
-          {chartData && <Pie data={chartData} options={options} />}
+          {chartData && pieChartInView && <Pie data={chartData} options={options} />}
         </div>
       </div>
 
       {/* Family Members Bar Chart */}
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
+      <div
+        ref={barChartRef}
+        className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
+        style={{ opacity: barChartInView ? 1 : 0, transition: 'opacity 1s ease' }}
+      >
         <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
           Age-Based Population Distribution
         </h2>
         <div className="w-full max-md:h-[54vh] h-full">
-          {memberData && <Bar data={memberData} options={memberOptions} />}
+          {memberData && barChartInView && <Bar data={memberData} options={memberOptions} />}
         </div>
       </div>
     </div>

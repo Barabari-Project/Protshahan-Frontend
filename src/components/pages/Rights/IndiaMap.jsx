@@ -68,8 +68,8 @@ const StateMap = () => {
                 const percentage = ((count / totalCount) * 100).toFixed(2); // Calculate the percentage
                 const message =
                   count > 0
-                    ? `(${percentage}% of total 816) people migrated from ${placeInfo?.["Place Address"] || 'Unknown'} `
-                    : `No data available for ${stateName}`;
+                    ? `(${percentage}% of total 816) people migrated from ${placeInfo?.["Place Address"] || ''} `
+                    : `No data available from  `;
                 
                 return (
                   <div className="tooltip flex max-md:w-screen">

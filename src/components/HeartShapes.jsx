@@ -40,7 +40,7 @@ const HeartModel = () => {
   const mobQuickLink = [
     {
       href: "/health",
-      title: "Health",
+      title: "Number of hours of Psychological intervention provided over 2024 : 630",
       points:
         "532.209 99.6315 558.693 132.422 585.178 170.256 610.401 215.658 633.102 269.888 648.236 325.379 654.541 382.131 682.287 355.647 703.727 340.513 733.994 325.379 768.046 315.29 795.791 312.767 822.275 314.029 844.976 319.073 867.677 327.901 889.117 340.513 906.773 354.386 919.385 366.997 940.824 396.004 952.175 388.437 968.57 377.086 984.965 366.997 998.838 358.169 1024.06 344.296 1059.37 326.64 1095.95 312.767 1131.26 301.417 1170.36 293.85 1204.41 288.805 1242.24 287.544 1275.03 290.066 1266.2 258.538 1257.38 238.359 1239.72 205.569 1213.23 168.995 1184.23 137.466 1152.7 107.198 1117.39 83.2365 1084.6 65.5802 1055.59 54.2298 1024.06 44.1406 990.01 40.3571 945.869 36.5736 906.773 40.3571 866.416 47.924 829.842 59.2745 788.224 76.9307 746.606 99.6315 712.555 124.855 679.764 152.6 652.019 184.129 640.669 171.518 620.49 148.817 591.483 124.855 568.783 107.198 553.649 98.3704 530.948 85.7588 509.508 74.4084",
       index: "1",
@@ -187,16 +187,17 @@ const hideTooltip = () => {
   {/* Tooltip */}
   <div
   id="tooltip"
-  className="fixed p-3 rounded-lg shadow-xl opacity-0 scale-90 transform transition-all duration-300 pointer-events-none bg-gradient-to-r from-[#ce441a] via-[#ce441a] to-[#ce441a] text-white text-xs 
-  animate-tooltip-tooltipIn hover:opacity-100 hover:scale-100 hover:translate-y-2"  style={{
+  className="fixed p-3 rounded-lg shadow-md bg-[#e0461f] text-white text-xs max-w-xs break-words"
+  style={{
     pointerEvents: "none",
-    boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)",
-    backdropFilter: "blur(4px)",
-    filter: "brightness(1.3)",
-    animation: "tooltip-glow 1.5s infinite alternate, tooltip-slide 0.3s ease-out",
+    whiteSpace: "normal",
+    wordBreak: "break-word",
+    
   }}
 />
 </div>
+
+
 
 <style jsx>{`
   @keyframes tooltip-glow {

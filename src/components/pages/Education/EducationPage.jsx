@@ -221,6 +221,9 @@ const EducationPage = () => {
                             },
                             color: "#e0461f",
                           },
+                          grid: {
+                            display: false, // Remove gridlines on the y-axis
+                          },
                         },
                         y: {
                           title: {
@@ -230,6 +233,9 @@ const EducationPage = () => {
                               size: 14,
                             },
                             color: "#e0461f",
+                          },
+                          grid: {
+                            display: false, // Remove gridlines on the y-axis
                           },
                         },
                       },
@@ -285,6 +291,9 @@ const EducationPage = () => {
                               },
                               color: "#e0461f",
                             },
+                            grid: {
+                              display: false, // Remove gridlines on the y-axis
+                            },
                           },
                           y: {
                             title: {
@@ -295,6 +304,9 @@ const EducationPage = () => {
                               },
                               color: "#e0461f",
                             },
+                          },
+                          grid: {
+                            display: false, // Remove gridlines on the y-axis
                           },
                         },
                         onClick: (evt, elements) => handleBarClick(elements),
@@ -338,6 +350,9 @@ const EducationPage = () => {
                           },
                           color: "#e0461f",
                         },
+                        grid: {
+                          display: false, // Remove gridlines on the y-axis
+                        },
                       },
                       y: {
                         title: {
@@ -347,6 +362,9 @@ const EducationPage = () => {
                             size: 14,
                           },
                           color: "#e0461f",
+                        },
+                        grid: {
+                          display: false, // Remove gridlines on the y-axis
                         },
                       },
                     },

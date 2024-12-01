@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Doughnut, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import CounterSection from "./CounterSection";
-import DataChart2 from "./DataChart3";
+import DataChart3 from "./DataChart3";
 import IndiaMap from "./IndiaMap";
 import occupationsData from "../json/rights/Data.json";
 // import GovtLinkage from "../Education/DataChart2";
-import HomeVisitsPieChart from "./DataChart4";
-import ServiverChart from "./DataChart5";
-import LostChart from "./DataChart6";
-import ScholarChart from "./DataChart2";
+import DataChart4 from "./DataChart4";
+import DataChart5 from "./DataChart5";
+import DataChart6 from "./DataChart6";
+import DataChart2 from "./DataChart2";
 import DataChart7 from "./DataChart7";
-import Terc from "./Tearrr";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -31,8 +30,8 @@ const Rights = () => {
     labels: ["4-9 Years", "10-19 Years", "20-29 Years"],
     datasets: [
       {
-        label: "Age Group Distribution",
-        data: [fourToNine.count, tenToNineteen.count, twentyToTwentyNine.count], // Use the 'count' values
+        label: "Age Distribution",
+        data: [fourToNine.count, tenToNineteen.count, twentyToTwentyNine.count], // Updated to use correct values
         backgroundColor: ["#3c3950", "#ce441a", "#919191"], // Colors for each section
       },
     ],
@@ -96,7 +95,7 @@ const Rights = () => {
       datasets: [
         {
           label: "Profession Percentage",
-          color:"#e8461e",
+          color: "#e8461e",
           data: filteredData.map((item) => item.percentage),
           backgroundColor: [
             "rgb(224, 70, 31)",
@@ -132,14 +131,43 @@ const Rights = () => {
             const percentage = professionData.datasets[0].data[index];
             return `${tooltipItem.dataset.label}: ${percentage.toFixed(
               2
-            )}% from the total [${
-              occupationsData.parent_profession.total_count
-            }]`;
+            )}% from the total [${occupationsData.parent_profession.total_count}]`;
           },
         },
       },
     },
   };
+
+  // Animation section
+  const [isDoughnutVisible, setDoughnutVisible] = useState(false);
+  const [isPieVisible, setPieVisible] = useState(false);
+
+  const doughnutRef = useRef(null);
+  const pieRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === doughnutRef.current && entry.isIntersecting) {
+            setDoughnutVisible(true);
+          }
+          if (entry.target === pieRef.current && entry.isIntersecting) {
+            setPieVisible(true);
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger animation when 30% of the chart is visible
+    );
+
+    if (doughnutRef.current) observer.observe(doughnutRef.current);
+    if (pieRef.current) observer.observe(pieRef.current);
+
+    return () => {
+      if (doughnutRef.current) observer.unobserve(doughnutRef.current);
+      if (pieRef.current) observer.unobserve(pieRef.current);
+    };
+  }, []);
 
   return (
     <div className="bg-[#3c3950] min-h-screen font-lato">
@@ -175,37 +203,59 @@ const Rights = () => {
             </div>
           </div>
           <CounterSection />
-          <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
-            <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
+          <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
+            {/* Doughnut Chart */}
+            <div
+              ref={doughnutRef}
+              className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg"
+            >
               <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
                 Age: 4-29 Years Boys & Girls
               </h2>
               <div className="w-full max-md:h-[54vh] h-full">
-                <Doughnut data={data} options={ageOptions} />
+                {isDoughnutVisible && <Doughnut data={data} options={ageOptions} />}
               </div>
             </div>
 
-            <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
+            {/* Pie Chart */}
+            <div
+              ref={pieRef}
+              className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg"
+            >
               <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">
-                Occupation of the Guardians / Family
+                Profession Percentage Data
               </h2>
               <div className="w-full max-md:h-[54vh] h-full">
-                {professionData && (
+                {isPieVisible && (
                   <Pie data={professionData} options={professionOptions} />
                 )}
               </div>
             </div>
           </div>
-        </div>
-        <IndiaMap />
-        <ScholarChart/>
-        <DataChart2 />
-        <HomeVisitsPieChart />
-        <ServiverChart />
-        <LostChart />
-        <DataChart7 />
-        {/* <Terc/> */}
 
+          <div className="p-6 m-4 bg-[#3c3950]">
+            <IndiaMap />
+          </div>
+
+          <div className="py-4 text-center m-6">
+            <DataChart2 />
+          </div>
+          <div className="py-4 text-center m-6">
+            <DataChart3 />
+          </div>
+          <div className="py-4 text-center m-6">
+            <DataChart4 />
+          </div>
+          <div className="py-4 text-center m-6">
+            <DataChart5 />
+          </div>
+          <div className="py-4 text-center m-6">
+            <DataChart6 />
+          </div>
+          <div className="py-4 text-center m-6">
+            <DataChart7 />
+          </div>
+        </div>
       </div>
     </div>
   );

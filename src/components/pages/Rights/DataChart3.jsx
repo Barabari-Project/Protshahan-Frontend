@@ -8,8 +8,39 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const DataChart3 = () => {
   const [incomeData, setIncomeData] = useState(null);
   const [genderData, setGenderData] = useState({ labels: [], datasets: [] });
+  const [isIncomeVisible, setIncomeVisible] = useState(false); // Control doughnut chart visibility
+  const [isGenderVisible, setGenderVisible] = useState(false); // Control bar chart visibility
+
   const dropdownRefDoughnut = useRef(null); // Define the ref for the dropdown
+  const incomeRef = useRef(null);
+  const genderRef = useRef(null);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Intersection Observer to trigger animation when charts are in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === incomeRef.current && entry.isIntersecting) {
+            setIncomeVisible(true); // Show doughnut chart when it comes into view
+          }
+          if (entry.target === genderRef.current && entry.isIntersecting) {
+            setGenderVisible(true); // Show bar chart when it comes into view
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (incomeRef.current) observer.observe(incomeRef.current);
+    if (genderRef.current) observer.observe(genderRef.current);
+
+    return () => {
+      if (incomeRef.current) observer.unobserve(incomeRef.current);
+      if (genderRef.current) observer.unobserve(genderRef.current);
+    };
+  }, []);
 
   // Prepare income distribution data
   useEffect(() => {
@@ -22,7 +53,7 @@ const DataChart3 = () => {
       datasets: [
         {
           label: "Income Distribution",
-          data: data,
+          data: isIncomeVisible ? data : [], // Show data only when chart is in view
           backgroundColor: [
             "rgb(224, 70, 31)", // Color 1
             "rgb(101, 25, 11)", // Color 2
@@ -34,7 +65,7 @@ const DataChart3 = () => {
         },
       ],
     });
-  }, []);
+  }, [isIncomeVisible]);
 
   const incomeOptions = {
     responsive: true,
@@ -72,7 +103,7 @@ const DataChart3 = () => {
       datasets: [
         {
           label: "Number of Scholarships Disbursed",
-          data: data,
+          data: isGenderVisible ? data : [], // Show data only when chart is in view
           backgroundColor: "#86250f",
           borderWidth: 2,
           borderRadius: 10,
@@ -81,7 +112,7 @@ const DataChart3 = () => {
         },
       ],
     });
-  }, []);
+  }, [isGenderVisible]);
 
   const options = {
     responsive: true,
@@ -111,6 +142,9 @@ const DataChart3 = () => {
           },
           color: "#e8461e",
         },
+        grid: {
+          display: false, // Remove gridlines on the y-axis
+        },
       },
       y: {
         beginAtZero: true,
@@ -127,6 +161,9 @@ const DataChart3 = () => {
             weight: "bold",
           },
           color: "#e8461e",
+        },
+        grid: {
+          display: false, // Remove gridlines on the y-axis
         },
       },
     },
@@ -150,9 +187,12 @@ const DataChart3 = () => {
   }, []);
 
   return (
-    <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
+    <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
       {/* Doughnut Chart Section */}
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
+      <div
+        ref={incomeRef}
+        className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg"
+      >
         <h2 className="text-xl font-semibold text-[#121331] mb-4 text-center">
           Income-Based Distribution of People
         </h2>
@@ -162,7 +202,10 @@ const DataChart3 = () => {
       </div>
 
       {/* Gender Chart Section */}
-      <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
+      <div
+        ref={genderRef}
+        className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
+      >
         <h2 className="text-xl font-semibold text-[#121331] mb-4 text-center">
           Scholarships Given by Gender
         </h2>
