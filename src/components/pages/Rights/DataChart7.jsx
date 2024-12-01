@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 import { Bar } from "react-chartjs-2";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import data from "../json/education/GovtLinkage.json"; // Ensure path is correct
@@ -123,10 +127,14 @@ const DataChart7 = () => {
         },
         ticks: {
           maxRotation: 0, // Keep the labels horizontal
+<<<<<<< HEAD
         },grid: {
           display: false,
         },
         
+=======
+        },
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
       y: {
         title: {
@@ -137,17 +145,24 @@ const DataChart7 = () => {
             size: 13,
             weight: "bold",
           },
+<<<<<<< HEAD
           
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         },
         beginAtZero: true,
         ticks: {
           stepSize: 10, // Set increment to 10 for better readability
+<<<<<<< HEAD
         },grid: {
           display: false,
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         },
       },
     },
   };
+<<<<<<< HEAD
   // animations
   const chartRef = useRef(null);
   const [isChartVisible, setIsChartVisible] = useState(false);
@@ -176,11 +191,14 @@ const DataChart7 = () => {
       }
     };
   }, []);
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
   return (
     <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
       <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
         {showCategoryChart && (
+<<<<<<< HEAD
           <div className="flex justify-start w-full">
 
           <button
@@ -190,6 +208,14 @@ const DataChart7 = () => {
             <IoMdArrowRoundBack className="text-white text-2xl hover:text-gray-300 " />
           </button>
             </div>
+=======
+          <button
+            className="transition-button"
+            onClick={handleBackToYearlyChart}
+          >
+            <IoMdArrowRoundBack className="text-white text-2xl hover:text-gray-300" />
+          </button>
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         )}
         <h1 className="text-2xl font-semibold text-[#212331] text-center mb-4">
           Interactive Data Visualization
@@ -227,9 +253,12 @@ const DataChart7 = () => {
                             weight: "bold",
                           },
                         },
+<<<<<<< HEAD
                         grid: {
                           display: false,
                         },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
                       },
                       y: {
                         title: {
@@ -240,9 +269,12 @@ const DataChart7 = () => {
                             size: 16,
                             weight: "bold",
                           },
+<<<<<<< HEAD
                           
                         },grid: {
                           display: false,
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
                         },
                       },
                     },
@@ -274,10 +306,14 @@ const DataChart7 = () => {
                         display: true,
                         text: "Categories →",
                         color: "#9966ff",
+<<<<<<< HEAD
                       },grid: {
                         display: false,
                       },
                       
+=======
+                      },
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
                     },
                     y: {
                       title: {
@@ -285,9 +321,12 @@ const DataChart7 = () => {
                         text: "Category Total →",
                         color: "#9966ff",
                       },
+<<<<<<< HEAD
                       grid: {
                         display: false,
                       },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
                     },
                   },
                 }}
@@ -298,6 +337,7 @@ const DataChart7 = () => {
       </div>
       <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
         <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
+<<<<<<< HEAD
           Scholarships that Matter: A Category Overview
         </h2>
         <div
@@ -308,6 +348,11 @@ const DataChart7 = () => {
               : "opacity-0 translate-x-10"
           }`}
         >
+=======
+          Scholarships that Matter: A Category Overview{" "}
+        </h2>
+        <div className="w-full max-md:h-[54vh] h-full">
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           {chartData && <Bar data={chartData} options={options} />}
         </div>
       </div>
@@ -363,6 +408,7 @@ const DataChart7 = () => {
   transform: scale(1.15);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
+<<<<<<< HEAD
    .transition-all {
           transition: all 0.7s ease-in-out;
         }
@@ -378,6 +424,8 @@ const DataChart7 = () => {
         .translate-x-10 {
           transform: translateY(20px);
         }
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 `}</style>
     </div>
   );

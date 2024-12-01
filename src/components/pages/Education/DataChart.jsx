@@ -10,7 +10,10 @@ import {
   Legend,
 } from "chart.js";
 import communityJsonData from "../json/beat.json"; // Renamed imported data to avoid conflict
+<<<<<<< HEAD
 import { useInView } from "react-intersection-observer"; // Import the hook
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
 // Register chart.js components
 ChartJS.register(
@@ -24,7 +27,11 @@ ChartJS.register(
 
 const EduChart = () => {
   const firstGenerationLearners =
+<<<<<<< HEAD
     communityJsonData?.First_Generation_Learner || [];
+=======
+  communityJsonData?.First_Generation_Learner || [];
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
   const totalRespondents = firstGenerationLearners[3]?.total_attended || 0;
 
   const firstGenPercentage = firstGenerationLearners.map((item) => {
@@ -56,9 +63,12 @@ const EduChart = () => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+<<<<<<< HEAD
     animation: {
       duration: 1000, // Set animation duration for smooth transition
     },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     plugins: {
       legend: {
         display: false,
@@ -77,7 +87,11 @@ const EduChart = () => {
             const salary = firstGenerationLearners[index]?.Salary;
             const total = firstGenerationLearners[index]?.total_attended;
             const percentage = firstGenPercentage[index];
+<<<<<<< HEAD
             return `${salary}: ${percentage}% (${total} responses) from the total ${totalRespondents}`;
+=======
+            return `${salary}: ${percentage}% (${total} responses) from the total 87`;
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
       },
@@ -86,26 +100,43 @@ const EduChart = () => {
       x: {
         title: {
           display: true,
+<<<<<<< HEAD
           text: "Salary",
           color: "#e8461e",
           font: {
             size: 14,
+=======
+          text: "Salary", // x-axis label
+          color: "#e8461e", // color of the label
+          font: {
+            size: 14, // size of the label text
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
         ticks: {
           color: "#2D3748",
         },
+<<<<<<< HEAD
         grid: {
           display: false,
         },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
       y: {
         title: {
           display: true,
+<<<<<<< HEAD
           text: "Percentage (%)",
           color: "#e8461e",
           font: {
             size: 14,
+=======
+          text: "Percentage (%)", // y-axis label
+          color: "#e8461e", // color of the label
+          font: {
+            size: 14, // size of the label text
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
         ticks: {
@@ -113,14 +144,21 @@ const EduChart = () => {
         },
         beginAtZero: true,
         max: 100,
+<<<<<<< HEAD
         grid: {
           display: false,
         },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
     },
   };
 
+<<<<<<< HEAD
   const [communityChartData, setCommunityChartData] = useState(null);
+=======
+  const [communityChartData, setCommunityChartData] = useState(null); // Renamed state
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 
   useEffect(() => {
     const applicantsData =
@@ -167,39 +205,60 @@ const EduChart = () => {
       x: {
         title: {
           display: true,
+<<<<<<< HEAD
           text: "Applicant Type",
           color: "#e8461e",
           font: {
             size: 14,
+=======
+          text: "Applicant Type", // x-axis label
+          color: "#e8461e", // color of the label
+          font: {
+            size: 14, // size of the label text
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
         ticks: {
           color: "#2D3748",
         },
+<<<<<<< HEAD
         grid: {
           display: false,
         },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
       y: {
         title: {
           display: true,
+<<<<<<< HEAD
           text: "Applicants Percentage (%)",
           color: "#e8461e",
           font: {
             size: 14,
+=======
+          text: "Applicants Percentage (%)", // y-axis label
+          color: "#e8461e", // color of the label
+          font: {
+            size: 14, // size of the label text
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
         ticks: {
           color: "#2D3748",
         },
         beginAtZero: true,
+<<<<<<< HEAD
         grid: {
           display: false,
         },
+=======
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
       },
     },
   };
 
+<<<<<<< HEAD
   const plugins = [
     {
       id: "percentageLabels",
@@ -263,6 +322,31 @@ const EduChart = () => {
         </div>
       </div>
     </div>
+=======
+  return (
+    <>
+      <div className="flex  justify-center items-center gap-6  bg-[#dcdcdc]  max-md:flex-col">
+        <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
+          <h2 className="font-lato text-lg font-semibold text-[#121331] mb-5 text-center">
+            First-Generation Learners: Salary Analysis Overview{" "}
+          </h2>
+          <div className="w-full max-md:h-[54vh] h-full">
+            <Bar data={chartData} options={options} />
+          </div>
+        </div>
+        <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
+          <h2 className="font-lato text-lg font-semibold text-[#121331] mb-5 text-center">
+            Community or GEC Bar Chart
+          </h2>
+          <div className="w-full max-md:h-[54vh] h-full">
+            {communityChartData && (
+              <Bar data={communityChartData} options={CommunityOptions} />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
   );
 };
 

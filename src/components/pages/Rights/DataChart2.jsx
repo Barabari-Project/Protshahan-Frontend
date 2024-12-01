@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
 import { Line, Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -28,6 +32,7 @@ import scholarshipData from "../json/rights/Data.json";
 const DataChart2 = () => {
   const [chartData, setChartData] = useState(null);
   const [supportRequestData, setSupportRequestData] = useState(null);
+<<<<<<< HEAD
   const [isLineVisible, setLineVisible] = useState(false);
   const [isDoughnutVisible, setDoughnutVisible] = useState(false);
 
@@ -36,11 +41,20 @@ const DataChart2 = () => {
 
   // Setup Line Chart Data
   useEffect(() => {
+=======
+
+  useEffect(() => {
+    // Extracting labels and data from the JSON
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     const categories = Object.keys(scholarshipData.categories_of_scholarship);
     const percentages = Object.values(
       scholarshipData.categories_of_scholarship
     ).map((item) => item.percentage);
 
+<<<<<<< HEAD
+=======
+    // Setting up data for the line chart
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     setChartData({
       labels: categories,
       datasets: [
@@ -48,6 +62,7 @@ const DataChart2 = () => {
           label: "Scholarship Percentage",
           data: percentages,
           borderColor: "#e8461e",
+<<<<<<< HEAD
           backgroundColor: "rgba(224, 70, 31, 0.2)",
           fill: true,
           tension: 0.4,
@@ -55,11 +70,18 @@ const DataChart2 = () => {
           pointHoverRadius: 8,
           pointHoverBackgroundColor: "#e8461e",
           pointHoverBorderWidth: 2,
+=======
+          backgroundColor: "red",
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: "#212331",
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
         },
       ],
     });
   }, []);
 
+<<<<<<< HEAD
   // Setup Doughnut Chart Data
   useEffect(() => {
     const supportTypes = scholarshipData.support_request.support_types;
@@ -89,13 +111,21 @@ const DataChart2 = () => {
     responsive: true,
     maintainAspectRatio: false,
 
+=======
+  const options = {
+    responsive: true,
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     plugins: {
       legend: {
         display: false,
       },
       tooltip: {
         callbacks: {
+<<<<<<< HEAD
           label: (tooltipItem) => {
+=======
+          label: function (tooltipItem) {
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
             return `${tooltipItem.label}: ${tooltipItem.raw}% from the total 628`;
           },
         },
@@ -117,6 +147,7 @@ const DataChart2 = () => {
         },
       },
     },
+<<<<<<< HEAD
     animation: {
       duration: 2000, // 2-second animation
       easing: "easeInOutQuart", // Smooth easing
@@ -124,6 +155,38 @@ const DataChart2 = () => {
   };
 
   const doughnutChartOptions = {
+=======
+  };
+
+  // Set up support chart data
+  useEffect(() => {
+    // Extract support types and their percentages from the imported data
+    const supportTypes = scholarshipData.support_request.support_types;
+    const labels = supportTypes.map((item) => item.type);
+    const data = supportTypes.map((item) => item.percentage_of_total);
+
+    setSupportRequestData({
+      labels: labels,
+      datasets: [
+        {
+          label: "Support Request Distribution",
+          data: data,
+          backgroundColor: [
+            "rgb(224, 70, 31)", // Color 1
+            "rgb(101, 25, 11)", // Color 2
+            "gray", // Color 4
+            "rgb(134, 37, 15)", // Color 3
+            "rgb(50, 105, 170)", // Color 5 // In Kind Scholarship Support
+          ],
+
+          borderWidth: 1,
+        },
+      ],
+    });
+  }, []);
+
+  const supportRequestOptions = {
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -137,12 +200,18 @@ const DataChart2 = () => {
       },
       tooltip: {
         callbacks: {
+<<<<<<< HEAD
           label: (tooltipItem) => {
             return `${tooltipItem.label}: ${tooltipItem.raw}% from the total ${scholarshipData.support_request.total_entries}`;
+=======
+          label: function (tooltipItem) {
+            return `${tooltipItem.label}: ${tooltipItem.raw}% from the total ${scholarshipData.support_request.total_entries}`; // Show percentage in tooltip
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
           },
         },
       },
     },
+<<<<<<< HEAD
     animation: {
       duration: 1500, // 1.5-second animation
       easing: "easeOutBounce", // Bouncy easing
@@ -208,6 +277,38 @@ const DataChart2 = () => {
         </div>
       </div>
     </div>
+=======
+  };
+
+  return (
+    <>
+      <div className="flex justify-center items-center gap-4 p-3 max-md:flex-col bg-[#dcdcdc] py-4">
+        <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
+          <h2 className="font-lato text-xl text-[#121331] mb-5 text-center font-semibold">
+            Categories of Provided Scholarships by us
+          </h2>
+          <div className="w-full max-md:h-[54vh] h-full">
+            {chartData && <Line data={chartData} options={options} />}
+          </div>
+        </div>
+
+        {/* Support Request Doughnut Chart */}
+        <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 py-6 flex justify-center items-center flex-col shadow-md rounded-lg">
+          <h2 className="font-lato text-xl text-[#121331] mb-5 text-center pt-3 font-semibold">
+            Support Channels Breakdown
+          </h2>
+          <div className="w-full max-md:h-[54vh] h-full">
+            {supportRequestData && (
+              <Doughnut
+                data={supportRequestData}
+                options={supportRequestOptions}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
   );
 };
 

@@ -15,7 +15,12 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+<<<<<<< HEAD
     "chart.js": "^4.4.6",
+=======
+    "chart.js": "^4.1.1",
+    "chartjs-plugin-annotation": "^2.0.0",
+>>>>>>> 6a8d991b856ad7570e3325adcafd57bd955ca6c6
     "d3": "^7.9.0",
     "d3-scale": "^4.0.2",
     "highcharts": "^11.4.8",
@@ -29,6 +34,7 @@
     "react-router-dom": "^6.26.2",
     "react-spring": "^9.7.4",
     "recharts": "^2.13.0",
+    "rimraf": "^6.0.1",
     "vite-plugin-node-polyfills": "^0.22.0"
   },
   "devDependencies": {
