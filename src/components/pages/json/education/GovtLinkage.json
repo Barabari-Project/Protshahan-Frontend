@@ -25,13 +25,7 @@
         },
         "grand_total": 66
       },
-      {
-        "category": "College Admission",
-        "monetary_compensation": "Enable for job",
-        "monetary_compensation_breakdown": {
-          "message": "No data available for this category"
-        }
-      },
+      
       {
         "category": "Ration Card",
         "monetary_compensation": "INR 175 per head",
@@ -144,13 +138,7 @@
           "description": "Assistance with school admissions for children.",
           "grand_total": 8
         },
-        {
-          "category": "Rehabilitation",
-          "description": "Rescue & Transition from Begging, sexual abuse, early and forced marriages, DV, any form Child Abuse, DV",
-          "monetary_compensation_breakdown": {
-            "message": "No data available for this category."
-          }
-        },
+        
         {
           "category": "Ration Card",
           "description": "Facilitation of ration card applications.",
@@ -176,20 +164,8 @@
           "description": "Referrals to Aanganwadi services for children.",
           "grand_total": 28
         },
-        {
-          "category": "Reintegration",
-          "description": "Educational Reintegration Support",
-          "monetary_compensation_breakdown": {
-            "message": "No data available for this category."
-          }
-        },
-        {
-          "category": "Educational Advancement.",
-          "description": "Post-secondary Education or Advanced Learning Access",
-          "monetary_compensation_breakdown": {
-            "message": "No data available for this category."
-          }
-        },
+        
+        
         {
           "category": "Bank Accounts",
           "description": "Assistance with opening bank accounts.",

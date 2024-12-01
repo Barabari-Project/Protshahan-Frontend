@@ -1,32 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Doughnut, Bar } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from "chart.js";
 import JsonData from "../json/rights/Data.json"; // Import the JSON data
+import { useInView } from "react-intersection-observer";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const DataChart3 = () => {
   const [incomeData, setIncomeData] = useState(null);
-  const [genderData, setGenderData] = useState({ labels: [], datasets: [] });
-  const [isIncomeVisible, setIncomeVisible] = useState(false); // Control doughnut chart visibility
-  const [isGenderVisible, setGenderVisible] = useState(false); // Control bar chart visibility
-
-  const dropdownRefDoughnut = useRef(null); // Define the ref for the dropdown
+  const [isIncomeVisible, setIncomeVisible] = useState(false);
   const incomeRef = useRef(null);
-  const genderRef = useRef(null);
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const { ref: genderRef, inView } = useInView({
+    threshold: 0.5,
+    onChange: (inView) => {
+      if (inView) setAnimate(true);
+    },
+  });
 
-  // Intersection Observer to trigger animation when charts are in view
+  // Intersection Observer for income chart
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.target === incomeRef.current && entry.isIntersecting) {
-            setIncomeVisible(true); // Show doughnut chart when it comes into view
-          }
-          if (entry.target === genderRef.current && entry.isIntersecting) {
-            setGenderVisible(true); // Show bar chart when it comes into view
+            setIncomeVisible(true);
           }
         });
       },
@@ -34,11 +41,9 @@ const DataChart3 = () => {
     );
 
     if (incomeRef.current) observer.observe(incomeRef.current);
-    if (genderRef.current) observer.observe(genderRef.current);
 
     return () => {
       if (incomeRef.current) observer.unobserve(incomeRef.current);
-      if (genderRef.current) observer.unobserve(genderRef.current);
     };
   }, []);
 
@@ -53,12 +58,12 @@ const DataChart3 = () => {
       datasets: [
         {
           label: "Income Distribution",
-          data: isIncomeVisible ? data : [], // Show data only when chart is in view
+          data: isIncomeVisible ? data : [],
           backgroundColor: [
-            "rgb(224, 70, 31)", // Color 1
-            "rgb(101, 25, 11)", // Color 2
-            "rgb(134, 37, 15)", // Color 3
-            "#121331", // Color 4
+            "rgb(224, 70, 31)",
+            "rgb(101, 25, 11)",
+            "rgb(134, 37, 15)",
+            "#121331",
             "gray",
           ],
           borderWidth: 1,
@@ -91,30 +96,20 @@ const DataChart3 = () => {
     },
   };
 
-  // Prepare gender distribution data
-  useEffect(() => {
-    const labels = JsonData.gender_distribution.map((item) => item.gender);
-    const data = JsonData.gender_distribution.map(
-      (item) => item.percentage_of_total
-    );
+  const genderData = {
+    labels: JsonData.gender_distribution.map((item) => item.gender),
+    datasets: [
+      {
+        label: "Number of People",
+        data: JsonData.gender_distribution.map((item) => (animate ? item.count : 0)),
+        backgroundColor: ["rgb(101, 25, 11)", "#e74c3c"],
+        borderColor: ["#2980b9", "#c0392b"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-    setGenderData({
-      labels: labels,
-      datasets: [
-        {
-          label: "Number of Scholarships Disbursed",
-          data: isGenderVisible ? data : [], // Show data only when chart is in view
-          backgroundColor: "#86250f",
-          borderWidth: 2,
-          borderRadius: 10,
-          barThickness: 55,
-          hoverBackgroundColor: "#e8461e",
-        },
-      ],
-    });
-  }, [isGenderVisible]);
-
-  const options = {
+  const genderOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -123,68 +118,57 @@ const DataChart3 = () => {
       },
       tooltip: {
         callbacks: {
-          label: (context) =>
-            `${context.raw}% from the total ${JsonData.total}`,
+          label: function (tooltipItem) {
+            const genderData =
+              JsonData.gender_distribution[tooltipItem.dataIndex];
+            return `${tooltipItem.label}: ${genderData.percentage_of_total}% from the total ${JsonData.total}`;
+          },
         },
       },
     },
     scales: {
       x: {
-        ticks: {
-          color: "#3c3950",
-        },
         title: {
           display: true,
           text: "Gender",
-          font: {
-            size: 16,
-            weight: "bold",
-          },
-          color: "#e8461e",
-        },
-        grid: {
-          display: false, // Remove gridlines on the y-axis
         },
       },
       y: {
         beginAtZero: true,
-        ticks: {
-          callback: (value) => `${value}%`,
-          color: "rgba(33, 35, 49, 0.7)",
-        },
-
         title: {
           display: true,
-          text: "Number of Scholarships Disbursed",
-          font: {
-            size: 16,
-            weight: "bold",
-          },
-          color: "#e8461e",
-        },
-        grid: {
-          display: false, // Remove gridlines on the y-axis
+          text: "Number of People",
         },
       },
     },
+    animation: {
+      duration: animate ? 1000 : 0,
+    },
   };
 
-  // Handle click outside dropdown to close it
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRefDoughnut.current &&
-        !dropdownRefDoughnut.current.contains(event.target)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
+  // Customize plugins
+  const plugins = [
+    {
+      id: "percentageLabels",
+      afterDatasetsDraw(chart) {
+        const { ctx, data } = chart;
+        const datasets = chart.data.datasets[0].data;
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+        chart.getDatasetMeta(0).data.forEach((bar, index) => {
+          const { x, y } = bar.tooltipPosition();
+          const percentage = JsonData.gender_distribution[index].percentage_of_total; // Correct percentage value
+
+          ctx.save();
+          ctx.font = "bold 12px Arial";
+          ctx.fillStyle = "#2D3748";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillText(`${percentage}%`, x, y - 5); // Display percentage above the bar
+          ctx.restore();
+        });
+      },
+    },
+  ];
 
   return (
     <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
@@ -207,10 +191,10 @@ const DataChart3 = () => {
         className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg"
       >
         <h2 className="text-xl font-semibold text-[#121331] mb-4 text-center">
-          Scholarships Given by Gender
+          Gender Distribution of People
         </h2>
         <div className="w-full max-md:h-[54vh] h-full">
-          <Bar data={genderData} options={options} />
+          <Bar data={genderData} options={genderOptions} plugins={plugins} />
         </div>
       </div>
     </div>

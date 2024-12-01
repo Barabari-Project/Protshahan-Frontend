@@ -218,7 +218,29 @@ const CombinedBarChart = () => {
 
   if (!firstChartData || !firstChartOptions || !secondChartData)
     return <div>Loading...</div>;
+//customize plugins 
+const plugins = [
+  {
+    id: "percentageLabels",
+    afterDatasetsDraw(chart) {
+      const { ctx, data } = chart;
+      const datasets = chart.data.datasets[0].data;
 
+      chart.getDatasetMeta(0).data.forEach((bar, index) => {
+        const { x, y } = bar.tooltipPosition();
+        const percentage = datasets[index];
+
+        ctx.save();
+        ctx.font = "bold 12px Arial";
+        ctx.fillStyle = "#2D3748";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(`${percentage.toFixed(2)}%`, x, y - 5); // Positioning above the bar
+        ctx.restore();
+      });
+    },
+  },
+];
   return (
     <div className="bg-[#3c3950] min-h-screen font-lato">
       <div className="bg-[#212331] text-white py-8 px-4 max-md:px-0">
@@ -258,7 +280,7 @@ const CombinedBarChart = () => {
                 Income Data Overview
               </h2>
               <div className="w-full max-md:h-[75vh] h-full">
-                <Bar data={firstChartData} options={firstChartOptions} />
+                <Bar data={firstChartData} options={firstChartOptions} plugins={plugins}/>
               </div>
             </div>
             <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
@@ -266,7 +288,7 @@ const CombinedBarChart = () => {
                 Skills Acquired Through Our NGO’s Support
               </h2>
               <div className="w-full max-md:h-[70vh] h-full">
-                <Bar data={secondChartData} options={secondChartOptions} />
+                <Bar data={secondChartData} options={secondChartOptions} plugins={plugins}/>
               </div>
             </div>
           </div>

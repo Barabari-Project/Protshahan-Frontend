@@ -123,12 +123,13 @@ const DataChart7 = () => {
         },
         ticks: {
           maxRotation: 0, // Keep the labels horizontal
-        },grid: {
+        },
+        grid: {
           display: false,
         },
-        
       },
       y: {
+       
         title: {
           display: true,
           text: "Number of Scholarships",
@@ -137,12 +138,12 @@ const DataChart7 = () => {
             size: 13,
             weight: "bold",
           },
-          
         },
         beginAtZero: true,
         ticks: {
           stepSize: 10, // Set increment to 10 for better readability
-        },grid: {
+        },
+        grid: {
           display: false,
         },
       },
@@ -176,20 +177,41 @@ const DataChart7 = () => {
       }
     };
   }, []);
+  //customize plugin
+  const plugins = [
+    {
+      id: "percentageLabels",
+      afterDatasetsDraw(chart) {
+        const { ctx, data } = chart;
+        const datasets = chart.data.datasets[0].data;
 
+        chart.getDatasetMeta(0).data.forEach((bar, index) => {
+          const { x, y } = bar.tooltipPosition();
+          const percentage = datasets[index];
+
+          ctx.save();
+          ctx.font = "bold 12px Arial";
+          ctx.fillStyle = "#2D3748";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillText(`${percentage}`, x, y - 5); // Positioning above the bar
+          ctx.restore();
+        });
+      },
+    },
+  ];
   return (
     <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
       <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
         {showCategoryChart && (
           <div className="flex justify-start w-full">
-
-          <button
-            className="transition-button"
-            onClick={handleBackToYearlyChart}
+            <button
+              className="transition-button"
+              onClick={handleBackToYearlyChart}
             >
-            <IoMdArrowRoundBack className="text-white text-2xl hover:text-gray-300 " />
-          </button>
-            </div>
+              <IoMdArrowRoundBack className="text-white text-2xl hover:text-gray-300 " />
+            </button>
+          </div>
         )}
         <h1 className="text-2xl font-semibold text-[#212331] text-center mb-4">
           Interactive Data Visualization
@@ -232,6 +254,9 @@ const DataChart7 = () => {
                         },
                       },
                       y: {
+                        beginAtZero: false,
+                        min: 5,
+                        max: 950,
                         title: {
                           display: true,
                           text: "Total Compensation →",
@@ -240,13 +265,14 @@ const DataChart7 = () => {
                             size: 16,
                             weight: "bold",
                           },
-                          
-                        },grid: {
+                        },
+                        grid: {
                           display: false,
                         },
                       },
                     },
                   }}
+                  plugins={plugins}
                 />
                 <p className="text-center text-[#e0461f] mt-4 text-xl font-semibold">
                   Click on any bar to see the categories
@@ -274,12 +300,13 @@ const DataChart7 = () => {
                         display: true,
                         text: "Categories →",
                         color: "#9966ff",
-                      },grid: {
+                      },
+                      grid: {
                         display: false,
                       },
-                      
                     },
                     y: {
+                     
                       title: {
                         display: true,
                         text: "Category Total →",
@@ -291,6 +318,7 @@ const DataChart7 = () => {
                     },
                   },
                 }}
+                plugins={plugins}
               />
             )}
           </div>
@@ -308,7 +336,9 @@ const DataChart7 = () => {
               : "opacity-0 translate-x-10"
           }`}
         >
-          {chartData && <Bar data={chartData} options={options} />}
+          {chartData && (
+            <Bar data={chartData} options={options} plugins={plugins} />
+          )}
         </div>
       </div>
       <style>{`.chart-wrapper {
