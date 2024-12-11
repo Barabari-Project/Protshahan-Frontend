@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { FaMoneyBillWave, FaLaptop, FaHandHoldingHeart, FaRupeeSign } from 'react-icons/fa';
+import { FaChalkboardTeacher} from 'react-icons/fa';
+import { GiOpenBook,GiTeacher} from 'react-icons/gi';
+import { AiOutlineTeam} from 'react-icons/ai';
+// import { MdAccountBalance} from 'react-icons/md';
+
 import data from '../json/rights/Data.json'; // Import the JSON file
 
-const RightCounter = () => {
+const EduCounter = () => {
   const counters = [
     {
-      icon: <FaMoneyBillWave />,
+      icon: <FaChalkboardTeacher />,
       count: data.direct_cash_transfer_scholarships.number_disbursed,
-      label: 'Direct Cash Transfer Scholarships Disbursed (2023-24)',
+      label: 'Empowering Young Minds Through Education',
     },
     {
-      icon: <FaLaptop />,
+      icon: <GiOpenBook />,
       count: data.digital_device_scholarships.number_awarded,
-      label: 'Digital Device Scholarships Awarded (2023-24)',
+      label: 'Providing Educational Opportunities for All',
     },
     {
-      icon: <FaHandHoldingHeart />,
+      icon: <AiOutlineTeam />,
       count: data.direct_cash_transfer_scholarships.amount_disbursed_inr,
-      label: 'Amount Disbursed via DCTs (INR)',
+      label: 'Numbers Children we helped',
     },
     {
-      icon: <FaRupeeSign />,
+      icon: <GiTeacher />,
       count: data.digital_device_scholarships.amount_invested_inr,
-      label: 'Amount Invested in Digital Device Scholarships (INR)',
+      label: 'Transforming the Lives of Children Through Learning',
     },
   ];
 
@@ -128,4 +132,4 @@ const RightCounter = () => {
   );
 };
 
-export default RightCounter;
+export default EduCounter;

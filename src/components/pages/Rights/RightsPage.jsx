@@ -11,6 +11,8 @@ import DataChart5 from "./DataChart5";
 import DataChart6 from "./DataChart6";
 import DataChart2 from "./DataChart2";
 import DataChart7 from "./DataChart7";
+import TextScroll from "./Text";
+import TimelineScroller from "./Text";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -237,24 +239,28 @@ const Rights = () => {
             <IndiaMap />
           </div>
 
-          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
+          <div className="py-4 text-center m-6">
             <DataChart2 />
           </div>
-          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
+          <div className="py-4 text-center m-6">
             <DataChart3 />
           </div>
-          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
+          <div className="py-4 text-center m-6">
             <DataChart4 />
           </div>
-          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
+          <div className="py-4 text-center m-6">
             <DataChart5 />
           </div>
-          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
+          <div className="py-4 text-center m-6">
             <DataChart6 />
           </div>
-          <div className="py-4 text-center m-6 max-md:m-0 max-md:py-0">
+          <div className="py-4 text-center m-6">
             <DataChart7 />
           </div>
+          <div className="py-4 text-center m-6">
+          <TimelineScroller/>
+          </div>
+         
         </div>
       </div>
     </div>

@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { FaMoneyBillWave, FaLaptop, FaHandHoldingHeart, FaRupeeSign } from 'react-icons/fa';
+import {FaStethoscope } from 'react-icons/fa';
+import {HiDeviceTablet} from 'react-icons/hi';
+import {MdSchool} from 'react-icons/md';
+import {GiReceiveMoney} from 'react-icons/gi';
 import data from '../json/rights/Data.json'; // Import the JSON file
 
-const RightCounter = () => {
+const HealthCounter = () => {
   const counters = [
     {
-      icon: <FaMoneyBillWave />,
+      icon: <MdSchool />,
       count: data.direct_cash_transfer_scholarships.number_disbursed,
-      label: 'Direct Cash Transfer Scholarships Disbursed (2023-24)',
+      label: 'Scholarships Promoting Health and Education',
     },
     {
-      icon: <FaLaptop />,
+      icon: <HiDeviceTablet />,
       count: data.digital_device_scholarships.number_awarded,
-      label: 'Digital Device Scholarships Awarded (2023-24)',
+      label: 'Digital Devices Empowering Healthy Learning',
     },
     {
-      icon: <FaHandHoldingHeart />,
+      icon: <GiReceiveMoney />,
       count: data.direct_cash_transfer_scholarships.amount_disbursed_inr,
-      label: 'Amount Disbursed via DCTs (INR)',
+      label: 'Financial Aid for a Healthier Future',
     },
     {
-      icon: <FaRupeeSign />,
+      icon: <FaStethoscope />,
       count: data.digital_device_scholarships.amount_invested_inr,
-      label: 'Amount Invested in Digital Device Scholarships (INR)',
+      label: 'Investments in Digital Health Resources',
     },
   ];
 
@@ -128,4 +131,4 @@ const RightCounter = () => {
   );
 };
 
-export default RightCounter;
+export default HealthCounter;

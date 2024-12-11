@@ -13,7 +13,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import yearlyData from "../json/education/YearlyMonthlyData.json"; // Yearly data
 import studentData from "../json/education/StudentPassOut.json"; // Student pass out data
 import EduChart from "./DataChart";
-// import DomesticViolenceDoughnutChart from "./Gec";
+import EduCounter from "./CounterSection";
+// import EduChart2 from "./DataChart2";
 
 // Register ChartJS components
 ChartJS.register(
@@ -53,9 +54,7 @@ const EducationPage = () => {
           {
             label: `Monthly Data for ${selectedYearData.year}`,
             data: Object.values(selectedYearData.monthWise),
-            backgroundColor: "#86250f",
-            borderColor: "rgba(153, 102, 255, 1)",
-            borderWidth: 1,
+            backgroundColor: "#df6b4f",
           },
         ],
       }
@@ -155,56 +154,29 @@ const EducationPage = () => {
     : getClasswiseStudentData(selectedSubject);
 
   // Common chart options
-  // Common chart options with plugin definition
-const commonChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  height: "80vh",
-  plugins: {
-    legend: {
-      position: "top",
-      labels: {
-        boxWidth: 15,
-        padding: 20,
-        usePointStyle: true,
+  const commonChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false, // Allow full control over height
+    height: "80vh",
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          boxWidth: 15,
+          padding: 20,
+          usePointStyle: true,
+        },
+        onClick: (e) => e.stopPropagation(),
       },
-      onClick: (e) => e.stopPropagation(),
     },
-   
-  },
-};
-//customize plugins
-const plugins = [
-  {
-    id: "percentageLabels",
-    afterDatasetsDraw(chart) {
-      const { ctx } = chart;
-
-      chart.data.datasets.forEach((dataset, datasetIndex) => {
-        const meta = chart.getDatasetMeta(datasetIndex);
-        meta.data.forEach((bar, index) => {
-          const { x, y } = bar.tooltipPosition();
-          const value = dataset.data[index];
-
-          ctx.save();
-          ctx.font = "bold 12px Arial";
-          ctx.fillStyle = "#2D3748";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "bottom";
-          ctx.fillText(`${value}`, x, y - 5); // Positioning above the bar
-          ctx.restore();
-        });
-      });
-    },
-  },
-];
+  };
 
   return (
     <div className="bg-[#3c3950] min-h-screen font-lato">
-      <div className="bg-[#212331] text-white py-8 px-11 max-md:px-0">
+      <div className="bg-[#212331] text-white py-8 px-4 max-md:px-0">
         <div className="flex text-2xl md:text-4xl p-4">
           <h1 className="text-[#e8461e]">
-            Protsahan EducationPage Impact | Data Story
+            Protsahan Education Impact | Data Story
           </h1>
         </div>
         <div className="bg-[#3c3950] rounded-lg shadow-lg pt-4">
@@ -224,8 +196,9 @@ const plugins = [
               </p>
             </div>
           </div>
+          <EduCounter />
 
-          <div className="flex justify-center py-10 px-4  bg-[#dcdcdc] gap-4 flex-col">
+          <div className="flex justify-center py-10 px-4  bg-[#dcdcdc] gap-4 flex-col max-md:flex-col">
             {/* Yearly Bar Chart */}
             <div className="flex gap-4 max-md:flex-col">
               <div className="w-1/2 max-md:w-full h-[73vh] max-md:h-[85vh] relative overflow-hidden bg-white p-4 rounded-lg shadow-md">
@@ -234,8 +207,8 @@ const plugins = [
                     showMonthlyChart ? "-translate-x-[45rem]" : "translate-x-0"
                   }`}
                 >
-                  <h2 className="text-xl font-bold text-center mb-4 text-[#212331]">
-                    Number of Lectures (Yearly)
+                  <h2 className="text-xl font-semibold text-center mb-4 text-[#212331]">
+                    Number of Lectures Conducted by us(Yearly)
                   </h2>
 
                   {/* Set responsive height for the chart container */}
@@ -261,7 +234,7 @@ const plugins = [
                               color: "#e0461f",
                             },
                             grid: {
-                              display: false,
+                              display: false, // Remove gridlines on the y-axis
                             },
                           },
                           y: {
@@ -274,17 +247,16 @@ const plugins = [
                               color: "#e0461f",
                             },
                             grid: {
-                              display: false,
+                              display: false, // Remove gridlines on the y-axis
                             },
                           },
                         },
                         onClick: (evt, elements) => handleBarClick(elements),
                       }}
-                      plugins={plugins}
                     />
                   </div>
 
-                  <p className="text-[#e8461e] text-center mt-2 font-bold text-[20px]">
+                  <p className="text-[#e8461e] text-center mt-2 font-bold text-[18px]">
                     Click on a bar to view monthly data!
                   </p>
                 </div>
@@ -308,7 +280,8 @@ const plugins = [
                     </div>
 
                     <h2 className="text-xl font-bold text-center mb-4 text-[#212331]">
-                      Number of Lectures in {selectedYearData.year} (Monthly)
+                      Number of Lectures in Conducted by us{" "}
+                      {selectedYearData.year} (Monthly)
                     </h2>
                     {/* Set responsive height for the monthly chart container */}
                     <div className="h-[60vh] max-md:h-[68vh] pb-14">
@@ -333,7 +306,7 @@ const plugins = [
                                 color: "#e0461f",
                               },
                               grid: {
-                                display: false,
+                                display: false, // Remove gridlines on the y-axis
                               },
                             },
                             y: {
@@ -345,14 +318,13 @@ const plugins = [
                                 },
                                 color: "#e0461f",
                               },
-                              grid: {
-                                display: false,
-                              },
+                            },
+                            grid: {
+                              display: false, // Remove gridlines on the y-axis
                             },
                           },
                           onClick: (evt, elements) => handleBarClick(elements),
                         }}
-                        plugins={plugins}
                       />
                     </div>
                   </div>
@@ -360,7 +332,7 @@ const plugins = [
               </div>
 
               {/* Student Pass Out Chart */}
-              <div className="w-1/2 max-md:w-full h-[73vh] max-md:h-[85vh] relative overflow-hidden bg-white p-4 rounded-lg shadow-md">
+              <div className="w-1/2 max-md:w-full h-[73 vh] max-md:h-[85vh] relative overflow-hidden bg-white p-4 rounded-lg shadow-md">
                 {selectedSubject && (
                   <div className="flex justify-start pt-0">
                     <button
@@ -372,10 +344,12 @@ const plugins = [
                   </div>
                 )}
 
+                {/* Conditionally render the heading only if selectedSubject is not set */}
                 <h2 className="text-xl font-bold text-center mb-4 text-[#212331]">
-                  Number of Students Passed Out
+                  Student Success Rates with Our Guidance{" "}
                 </h2>
 
+                {/* Set responsive height for the student chart container */}
                 <div className="h-[55.5vh] max-md:h-[66vh]">
                   <Bar
                     data={studentChartData}
@@ -385,41 +359,46 @@ const plugins = [
                         x: {
                           title: {
                             display: true,
-                            text: selectedSubject ? "Classes →" : "Years →",
-                            font: { size: 14 },
+                            text: selectedSubject ? "Classes →" : "Years →", // Dynamic x-axis label for student chart
+                            font: {
+                              size: 14,
+                            },
                             color: "#e0461f",
                           },
-                          grid: { display: false },
+                          grid: {
+                            display: false, // Remove gridlines on the y-axis
+                          },
                         },
                         y: {
                           title: {
                             display: true,
                             text: selectedSubject
                               ? "Number of Students in Class →"
-                              : "Number of Students Passed →",
-                            font: { size: 14 },
+                              : "Number of Students Passed →", // Dynamic y-axis label
+                            font: {
+                              size: 14,
+                            },
                             color: "#e0461f",
                           },
-                          grid: { display: false },
+                          grid: {
+                            display: false, // Remove gridlines on the y-axis
+                          },
                         },
                       },
                       onClick: (evt, elements) =>
                         handleStudentClick(evt, elements),
                     }}
-                    plugins={plugins} // Pass the plugins array here
                   />
                 </div>
-
                 {!selectedSubject && (
-                  <h2 className="text-[#e8461e] text-center mt-2 font-bold text-[20px]">
+                  <h2 className="text-[#e8461e] text-center mt-2 font-bold text-[18px]">
                     Click on a bar to view passed students data!
                   </h2>
                 )}
               </div>
             </div>
-            {/* <DomesticViolenceDoughnutChart/> */}
+            <EduChart />
           </div>
-          <EduChart />
         </div>
       </div>
     </div>

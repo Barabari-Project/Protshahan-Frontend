@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import HealthCounter from "./CounterSection";
 
 // Register chart.js components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -138,6 +139,7 @@ const BarChart = () => {
               </p>
             </div>
           </div>
+          <HealthCounter/>
           <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
             <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
               <h2 className="text-xl font-semibold text-center mb-4 text-[#121331]">

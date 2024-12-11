@@ -13,6 +13,7 @@ import {
 // Importing the JSON files directly
 import jsonData from "../json/technology/Barchart2.json";
 import chartData from "../json/technology/Barchart.json";
+import TechCounter from "./CounterSection";
 
 // Register Chart.js components
 ChartJS.register(
@@ -198,9 +199,7 @@ const CombinedBarChart = () => {
             text: "Categories",
             color: "#e8461e",
             font: { size: 16, weight: "bold" },
-          },grid:{
-            display:false
-          }
+          },
         },
         y: {
           title: {
@@ -213,9 +212,6 @@ const CombinedBarChart = () => {
           min: 0,
           max: 50,
           ticks: { stepSize: 10 },
-          grid:{
-            display:false
-          }
         },
       },
     };
@@ -223,29 +219,7 @@ const CombinedBarChart = () => {
 
   if (!firstChartData || !firstChartOptions || !secondChartData)
     return <div>Loading...</div>;
-//customize plugins 
-const plugins = [
-  {
-    id: "percentageLabels",
-    afterDatasetsDraw(chart) {
-      const { ctx, data } = chart;
-      const datasets = chart.data.datasets[0].data;
 
-      chart.getDatasetMeta(0).data.forEach((bar, index) => {
-        const { x, y } = bar.tooltipPosition();
-        const percentage = datasets[index];
-
-        ctx.save();
-        ctx.font = "bold 12px Arial";
-        ctx.fillStyle = "#2D3748";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "bottom";
-        ctx.fillText(`${percentage.toFixed(2)}%`, x, y - 5); // Positioning above the bar
-        ctx.restore();
-      });
-    },
-  },
-];
   return (
     <div className="bg-[#3c3950] min-h-screen font-lato">
       <div className="bg-[#212331] text-white py-8 px-4 max-md:px-0">
@@ -279,13 +253,14 @@ const plugins = [
               </p>
             </div>
           </div>
+          <TechCounter/>
           <div className="flex justify-center items-center gap-6 p-5 bg-[#dcdcdc] max-md:flex-col">
             <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
               <h2 className="text-[18px] font-bold text-center mb-4 text-[#e8461e]">
                 Income Data Overview
               </h2>
               <div className="w-full max-md:h-[75vh] h-full">
-                <Bar data={firstChartData} options={firstChartOptions} plugins={plugins}/>
+                <Bar data={firstChartData} options={firstChartOptions} />
               </div>
             </div>
             <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
@@ -293,7 +268,7 @@ const plugins = [
                 Skills Acquired Through Our NGO’s Support
               </h2>
               <div className="w-full max-md:h-[70vh] h-full">
-                <Bar data={secondChartData} options={secondChartOptions} plugins={plugins}/>
+                <Bar data={secondChartData} options={secondChartOptions} />
               </div>
             </div>
           </div>

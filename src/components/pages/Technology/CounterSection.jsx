@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { FaMoneyBillWave, FaLaptop, FaHandHoldingHeart, FaRupeeSign } from 'react-icons/fa';
+import { FaLaptopCode, FaGlobeAmericas, FaRocket, FaLaptop  } from 'react-icons/fa';
+import { GiSmartphone} from 'react-icons/gi';
 import data from '../json/rights/Data.json'; // Import the JSON file
 
-const RightCounter = () => {
+const TechCounter = () => {
   const counters = [
     {
-      icon: <FaMoneyBillWave />,
+      icon: <FaGlobeAmericas />,
       count: data.direct_cash_transfer_scholarships.number_disbursed,
-      label: 'Direct Cash Transfer Scholarships Disbursed (2023-24)',
+      label: 'Enabling Global Connectivity and Progress with Technology',
     },
     {
-      icon: <FaLaptop />,
+      icon: <FaLaptopCode />,
       count: data.digital_device_scholarships.number_awarded,
-      label: 'Digital Device Scholarships Awarded (2023-24)',
+      label: 'Promoting Digital Literacy and Tech Skills for the Future"',
     },
     {
-      icon: <FaHandHoldingHeart />,
+      icon: <FaRocket />,
       count: data.direct_cash_transfer_scholarships.amount_disbursed_inr,
-      label: 'Amount Disbursed via DCTs (INR)',
+      label: 'Empowering Innovation Through Technology Solutions',
     },
     {
-      icon: <FaRupeeSign />,
+      icon: <GiSmartphone  />, // Replaced GiChildPlaying with FaChild
       count: data.digital_device_scholarships.amount_invested_inr,
-      label: 'Amount Invested in Digital Device Scholarships (INR)',
+      label: 'Number of Children we supported through technology',
     },
   ];
 
@@ -128,4 +129,4 @@ const RightCounter = () => {
   );
 };
 
-export default RightCounter;
+export default TechCounter;

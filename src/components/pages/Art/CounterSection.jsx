@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { FaMoneyBillWave, FaLaptop, FaHandHoldingHeart, FaRupeeSign } from 'react-icons/fa';
+// Import necessary icons from react-icons
+import { FaPaintBrush } from 'react-icons/fa';
+import { FaUserTie } from 'react-icons/fa';
+import { MdGroupWork } from 'react-icons/md';
+import { FaChild } from 'react-icons/fa'; // Replace GiChildPlaying with a working icon
 import data from '../json/rights/Data.json'; // Import the JSON file
 
-const RightCounter = () => {
+const ArtCounter = () => {
   const counters = [
     {
-      icon: <FaMoneyBillWave />,
+      icon: <MdGroupWork />,
       count: data.direct_cash_transfer_scholarships.number_disbursed,
-      label: 'Direct Cash Transfer Scholarships Disbursed (2023-24)',
+      label: 'Organizing Art Competitions and Skill-Building Workshops',
     },
     {
-      icon: <FaLaptop />,
+      icon: <FaPaintBrush />,
       count: data.digital_device_scholarships.number_awarded,
-      label: 'Digital Device Scholarships Awarded (2023-24)',
+      label: 'Encouraging Creative Expression Through Community Art Projects',
     },
     {
-      icon: <FaHandHoldingHeart />,
+      icon: <FaUserTie />,
       count: data.direct_cash_transfer_scholarships.amount_disbursed_inr,
-      label: 'Amount Disbursed via DCTs (INR)',
+      label: 'Supporting Artistic Journeys with Personalized Guidance',
     },
     {
-      icon: <FaRupeeSign />,
+      icon: <FaChild />, // Replaced GiChildPlaying with FaChild
       count: data.digital_device_scholarships.amount_invested_inr,
-      label: 'Amount Invested in Digital Device Scholarships (INR)',
+      label: 'Number of Children artists we supported',
     },
   ];
 
@@ -42,7 +46,7 @@ const RightCounter = () => {
           .split('')
           .map(() => Math.floor(Math.random() * 10)) // Random digits for shuffle
           .join('');
-        
+
         setDisplayCounts((prev) => {
           const newCounts = [...prev];
           newCounts[index] = randomDigits;
@@ -128,4 +132,4 @@ const RightCounter = () => {
   );
 };
 
-export default RightCounter;
+export default ArtCounter;

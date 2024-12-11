@@ -57,7 +57,7 @@ const DataChart6 = () => {
   });
 
   const lostParentChartData = {
-    labels: lostParentData.map((item) => item?.salary || "Unknown"),
+    labels: lostParentData.map((item) => item?.Salary || "Unknown"),
     datasets: [
       {
         label: "Lost A Parent Percentage (%)",
@@ -120,39 +120,12 @@ const DataChart6 = () => {
     }
   }, [isBarVisible]);
 
-  // Plugin to add percentage values above bars
-  const plugins = [
-    {
-      id: "percentageLabels",
-      afterDatasetsDraw(chart) {
-        const { ctx, data } = chart;
-        const datasets = chart.data.datasets[0].data;
-
-        chart.getDatasetMeta(0).data.forEach((bar, index) => {
-          const { x, y } = bar.tooltipPosition();
-          const percentage = datasets[index];
-
-          ctx.save();
-          ctx.font = "bold 12px Arial";
-          ctx.fillStyle = "#2D3748";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "bottom";
-          ctx.fillText(`${percentage}`, x, y - 5); // Positioning above the bar
-          ctx.restore();
-        });
-      },
-    },
-  ];
-
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
-      },
-      tooltip: {
-        enabled: true, // Disable default tooltips
       },
     },
     scales: {
@@ -167,9 +140,9 @@ const DataChart6 = () => {
           },
           color: "#e8461e",
         },
-        grid: {
-          display: false,
-        },
+        grid:{
+          display:false
+        }
       },
       x: {
         title: {
@@ -181,9 +154,9 @@ const DataChart6 = () => {
           },
           color: "#e8461e",
         },
-        grid: {
-          display: false,
-        },
+        grid:{
+          display:false
+        }
       },
     },
   };
@@ -200,7 +173,7 @@ const DataChart6 = () => {
         </h2>
         {Object.keys(barChartData).length ? (
           <div className="w-full max-md:h-[54vh] h-full">
-            <Bar data={barChartData} options={options} plugins={plugins}/>
+            <Bar data={barChartData} options={options} />
           </div>
         ) : (
           <p>No data available for rented people.</p>

@@ -9,7 +9,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import data from "../json/art/art.json";
+import data from "./art.json";
+import ArtCounter from "./CounterSection";
 
 // Register the necessary components from Chart.js
 ChartJS.register(
@@ -70,7 +71,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },grid:{display:false}
+        },
       },
       y: {
         beginAtZero: true,
@@ -89,7 +90,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },grid:{display:false}
+        },
       },
     },
   };
@@ -142,7 +143,7 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },grid:{display:false}
+        },
       },
       y: {
         beginAtZero: true,
@@ -157,33 +158,11 @@ const GirlParticipantsChart = () => {
             weight: "bold",
           },
           color: "#e8461e",
-        },grid:{display:false}
+        },
       },
     },
   };
-//customize plugins 
-const plugins = [
-  {
-    id: "percentageLabels",
-    afterDatasetsDraw(chart) {
-      const { ctx, data } = chart;
-      const datasets = chart.data.datasets[0].data;
 
-      chart.getDatasetMeta(0).data.forEach((bar, index) => {
-        const { x, y } = bar.tooltipPosition();
-        const percentage = datasets[index];
-
-        ctx.save();
-        ctx.font = "bold 12px Arial";
-        ctx.fillStyle = "#2D3748";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "bottom";
-        ctx.fillText(`${percentage}`, x, y - 5); // Positioning above the bar
-        ctx.restore();
-      });
-    },
-  },
-];
   return (
     <>
     <div className="bg-[#3c3950] min-h-screen font-lato">
@@ -218,22 +197,22 @@ const plugins = [
               </p>
             </div>
           </div>
-
+<ArtCounter/>
       <div className="flex  justify-center items-center gap-6 p-5 bg-[#dcdcdc]  max-md:flex-col">
         <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
           <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
             Girl Participation Statistics in Arts and Activities
           </h2>
-          <div className="w-full max-md:h-[64vh] h-full">
-            <Bar data={chartData} options={options} plugins={plugins}/>
+          <div className="w-full max-md:h-[54vh] h-full">
+            <Bar data={chartData} options={options} />
           </div>
         </div>
         <div className="w-1/2 max-md:w-full h-[75vh] bg-white p-5 flex justify-center items-center flex-col shadow-md rounded-lg">
           <h2 className="font-lato text-xl text-[#121331] mb-3 text-center font-semibold">
             Number of Sessions Conducted by us
           </h2>
-          <div className="w-full max-md:h-[64vh] h-full">
-            <Bar data={sessionData} options={sessionOptions} plugins={plugins}/>
+          <div className="w-full max-md:h-[54vh] h-full">
+            <Bar data={sessionData} options={sessionOptions} />
           </div>
         </div>
       </div>

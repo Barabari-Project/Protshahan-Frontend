@@ -4,6 +4,7 @@ import { map } from "leaflet";
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Ensure you import Link from react-router-dom
 import { FaUsers, FaHandsHelping, FaBalanceScale, FaBriefcase, FaHeart, FaShieldAlt } from 'react-icons/fa';
+// import YearScroller from "./Footerr";
 
 
 const HeartModel = () => {
@@ -257,7 +258,7 @@ const hideTooltip = () => {
         ))}
 
 
-
+{/* <YearScroller/> */}
       </div>
 
 
